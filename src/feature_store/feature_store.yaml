@@ -1,0 +1,20 @@
+project: iris_project
+
+provider: local
+
+registry:
+  registry_type: sql
+  path: postgresql+psycopg2://admin:admin@localhost:5432/feature_store
+
+offline_store:
+  type: postgres
+  host: localhost
+  port: 5432
+  database: feature_store
+  user: admin
+  password: admin
+  sslmode: disable
+
+online_store:
+  type: sqlite
+  path: data/online_store.db

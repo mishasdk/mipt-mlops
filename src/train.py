@@ -25,7 +25,7 @@ def train():
     mlflow.set_experiment("iris")
 
     with mlflow.start_run():
-        model = RandomForestClassifier(n_estimators=100, max_depth=10)
+        model = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=42)
         model.fit(X_train, y_train)
 
         train_preds = model.predict(X_train)

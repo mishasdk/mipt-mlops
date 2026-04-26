@@ -41,10 +41,10 @@ stages:
       size: 3251
     - path: src/train.py
       hash: md5
-      md5: 591f042543f8774e25a190234701b423
-      size: 1779
+      md5: 48a80b55db6aed125ecf7dca78abad33
+      size: 1913
     outs:
     - path: data/models/iris_classifier.pkl
       hash: md5
-      md5: bc3e7f3df45795959c90042b07172698
-      size: 116129
+      md5: bf5249c8812575d1699c32cb5c2bfbe2
+      size: 117713

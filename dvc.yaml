@@ -1,0 +1,16 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+      - src/preprocess.py
+      - data/raw/energydata_complete_v1.csv
+    outs:
+      - data/processed/energydata_complete_v1.csv
+
+  metrics:
+    cmd: python src/metrics.py
+    deps:
+      - src/metrics.py
+      - data/processed/energydata_complete_v1.csv
+    outs:
+      - data/metrics/energydata_complete_v1.json

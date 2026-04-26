@@ -1,0 +1,34 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - path: data/raw/energydata_complete_v1.csv
+      hash: md5
+      md5: 9d69e129ab72daf11e3712a9d8895eb5
+      size: 4349
+    - path: src/preprocess.py
+      hash: md5
+      md5: 7f93004eecc58c56b6acd2478d578100
+      size: 630
+    outs:
+    - path: data/processed/energydata_complete_v1.csv
+      hash: md5
+      md5: 8b8c45c31ea960c2ed4627349982bd58
+      size: 4351
+  metrics:
+    cmd: python src/metrics.py
+    deps:
+    - path: data/processed/energydata_complete_v1.csv
+      hash: md5
+      md5: 8b8c45c31ea960c2ed4627349982bd58
+      size: 4351
+    - path: src/metrics.py
+      hash: md5
+      md5: 4b4aa3af03144e9e594ddcc0f93e8d7f
+      size: 1555
+    outs:
+    - path: data/metrics/energydata_complete_v1.json
+      hash: md5
+      md5: d56f3f1e87cdeffcd373646e416fb749
+      size: 1242

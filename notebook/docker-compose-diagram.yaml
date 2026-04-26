@@ -1,0 +1,81 @@
+services:
+
+  # 2. Backend API
+  backend_api:
+    container_name: backend_api
+    depends_on:
+      - video_blur_service
+    labels:
+      "docker_compose_diagram.cluster": "Backend сервиса"
+      "docker_compose_diagram.icon": "diagrams.onprem.compute.Server"
+
+  backend_api_db:
+    container_name: backend_api_db
+    labels:
+      "docker_compose_diagram.cluster": "Backend сервиса"
+      "docker_compose_diagram.icon": "diagrams.aws.database.RDS"
+      "docker_compose_diagram.description": "Хранилище сервиса"
+
+  # 3. Сервис обработки видео.
+  video_blur_service:
+    container_name: video_blur_service
+    depends_on:
+      - mlinference
+    labels:
+      "docker_compose_diagram.cluster": "Сервис обработки видео"
+      "docker_compose_diagram.icon": "diagrams.onprem.compute.Server"
+
+  video_blur_service_db:
+    container_name: video_blur_service_db
+    labels:
+      "docker_compose_diagram.cluster": "Сервис обработки видео"
+      "docker_compose_diagram.icon": "diagrams.aws.database.RDS"
+      "docker_compose_diagram.description": "Хранилище сервиса"
+
+  # 4. Инференс
+  mlinference:
+    container_name: mlinference
+    depends_on:
+      - mlregistry
+    labels:
+      "docker_compose_diagram.cluster": "Инфреренс"
+      "docker_compose_diagram.icon": "diagrams.onprem.compute.Server"
+
+  # 5. Обучение
+  mltrain:
+    container_name: mltrainэ
+    depends_on:
+      - mlregistry
+    labels:
+      "docker_compose_diagram.cluster": "Обучение ML модели"
+      "docker_compose_diagram.icon": "diagrams.onprem.compute.Server"
+      "docker_compose_diagram.description": "описание"
+
+  airflow:
+    image: apache/airflow:2.8.1
+    container_name: airflow
+    labels:
+      "docker_compose_diagram.cluster": "Обучение ML модели"
+      "docker_compose_diagram.description": "ML pipelines"
+
+  mltrain_db:
+    container_name: mltrain_db
+    labels:
+      "docker_compose_diagram.cluster": "Обучение ML модели"
+      "docker_compose_diagram.icon": "diagrams.aws.database.RDS"
+      "docker_compose_diagram.description": "Хранилище"
+
+  # 5. Хранение и распространение обученных моделей
+  mlregistry:
+    container_name: mlregistry
+    labels:
+      "docker_compose_diagram.cluster": "Репозиторий моделей"
+      "docker_compose_diagram.icon": "diagrams.onprem.compute.Server"
+      "docker_compose_diagram.description": "Репозиторий моделей"
+
+  mlregistry_db:
+    container_name: mlregistry_db
+    labels:
+      "docker_compose_diagram.cluster": "Репозиторий моделей"
+      "docker_compose_diagram.icon": "diagrams.aws.database.RDS"
+      "docker_compose_diagram.description": "Хранилище репозиториев"

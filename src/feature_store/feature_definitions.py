@@ -53,6 +53,6 @@ iris_features = FeatureView(
         Field(name="sepal_width", dtype=Float32),
         Field(name="petal_length", dtype=Float32),
         Field(name="petal_width", dtype=Float32),
-        Field(name="variety", dtype=String)
+        Field(name="variety", dtype=Int64)
     ],
 )

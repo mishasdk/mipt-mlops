@@ -1,6 +1,8 @@
 import pandas as pd
 import os
 
+from sklearn.preprocessing import LabelEncoder
+
 
 NAME = "energydata_complete_v1"
 
@@ -21,6 +23,10 @@ def preprocess():
 
     df = df.dropna()
     df = df.drop_duplicates()
+
+    encoder = LabelEncoder()
+    y_encoded = encoder.fit_transform(df["variety"])
+    df["variety"] = y_encoded
 
     os.makedirs("data/processed", exist_ok=True)
     df.to_csv(f"data/processed/{NAME}.csv", index=False)

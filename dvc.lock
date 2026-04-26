@@ -9,20 +9,20 @@ stages:
       size: 4349
     - path: src/preprocess.py
       hash: md5
-      md5: 7f93004eecc58c56b6acd2478d578100
-      size: 630
+      md5: 6ce4567d00787f01a276b79b52b04b42
+      size: 791
     outs:
     - path: data/processed/energydata_complete_v1.csv
       hash: md5
-      md5: 8b8c45c31ea960c2ed4627349982bd58
-      size: 4351
+      md5: af6d0170fbbb52e3d4095dab2d6ffe9d
+      size: 3251
   metrics:
     cmd: python src/metrics.py
     deps:
     - path: data/processed/energydata_complete_v1.csv
       hash: md5
-      md5: 8b8c45c31ea960c2ed4627349982bd58
-      size: 4351
+      md5: af6d0170fbbb52e3d4095dab2d6ffe9d
+      size: 3251
     - path: src/metrics.py
       hash: md5
       md5: 4b4aa3af03144e9e594ddcc0f93e8d7f
@@ -30,5 +30,21 @@ stages:
     outs:
     - path: data/metrics/energydata_complete_v1.json
       hash: md5
-      md5: d56f3f1e87cdeffcd373646e416fb749
-      size: 1242
+      md5: b16320feef5da4188a2db657c4346030
+      size: 1315
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed/energydata_complete_v1.csv
+      hash: md5
+      md5: af6d0170fbbb52e3d4095dab2d6ffe9d
+      size: 3251
+    - path: src/train.py
+      hash: md5
+      md5: 591f042543f8774e25a190234701b423
+      size: 1779
+    outs:
+    - path: data/models/iris_classifier.pkl
+      hash: md5
+      md5: bc3e7f3df45795959c90042b07172698
+      size: 116129

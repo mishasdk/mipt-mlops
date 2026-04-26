@@ -14,3 +14,11 @@ stages:
       - data/processed/energydata_complete_v1.csv
     outs:
       - data/metrics/energydata_complete_v1.json
+
+  train:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - data/processed/energydata_complete_v1.csv
+    outs:
+      - data/models/iris_classifier.pkl
